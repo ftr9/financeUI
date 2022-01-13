@@ -41,8 +41,8 @@ const HomeO = () => {
 
                 <View style={{ paddingTop: 45, paddingBottom: 30, flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center' }}>
                     <View style={{ color: 'white' }}>
-                        <Text style={{ fontSize: 40, color: 'white', fontWeight: 'bold' }} >Hello Rahul</Text>
-                        <Text style={{ fontSize: 20, color: 'white' }}>Welcome Back!</Text>
+                        <Text style={{ fontSize: 40, color: 'white', fontWeight: 'bold', fontFamily: 'Lato-Regular' }} >Hello Rahul</Text>
+                        <Text style={{ fontSize: 20, color: 'white', fontFamily: 'Lato-Regular' }}>Welcome Back!</Text>
                     </View>
                     <View style={{ borderRadius: 8, borderColor: 'gray', borderWidth: 1, padding: 10 }}>
                         <Icon color={'white'} size={25} name="settings"></Icon>

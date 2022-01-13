@@ -1,10 +1,13 @@
-import { StyleSheet, Text, View } from 'react-native'
+import { StyleSheet, Image } from 'react-native'
 import { HomeO, Credit, Achievement, Profile } from './HomePage'
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs'
 import { Icon } from 'react-native-elements'
+import { useEffect } from 'react'
 const bgColor = "#2A2A2A"
 const Tab = createBottomTabNavigator()
+
 const Home = () => {
+
     return (
         <Tab.Navigator>
             <Tab.Screen
@@ -43,7 +46,9 @@ const Home = () => {
                         backgroundColor: bgColor
                     },
                     headerShown: false,
-                    tabBarIcon: props => <Icon color={props.focused ? 'white' : 'gray'} type="ionicon" name="bar-chart"></Icon>,
+                    tabBarIcon: props => {
+                        return (<Icon color={props.focused ? 'white' : 'gray'} type="ionicon" name="bar-chart"></Icon>)
+                    },
                     tabBarShowLabel: false,
                 }}
                 name="achievement"

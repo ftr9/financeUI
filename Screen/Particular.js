@@ -1,6 +1,7 @@
-import { StyleSheet, Text, View, Image } from 'react-native'
+import { StyleSheet, Text, View, Image, Dimensions, ScrollView } from 'react-native'
 import { Icon } from 'react-native-elements';
 import InitialView from '../components/InitialView'
+import { LineChart } from 'react-native-chart-kit';
 
 const datas = [
     {
@@ -52,35 +53,85 @@ const InfoCard = ({ iconName, type, numbers, bgColor }) => {
 
 const Particular = () => {
     return (
-        <InitialView>
-            <View style={{ paddingHorizontal: 40, paddingVertical: 10 }}>
-                <View style={{ flexDirection: 'row', justifyContent: 'space-between' }}>
-                    <Text style={styles.styleDigits, styles.styleDigitsNumber}>$ 4,73.29</Text>
-                    <Text style={styles.styleDigits, styles.styleDigitsNumber} >$ 80.3M</Text>
-                    <Text style={styles.styleDigits, styles.styleDigitsNumber} >$ 1.63M</Text>
+        <ScrollView>
+
+            <InitialView>
+                <View style={{ paddingHorizontal: 40, paddingVertical: 10 }}>
+                    <View style={{ flexDirection: 'row', justifyContent: 'space-between' }}>
+                        <Text style={styles.styleDigits, styles.styleDigitsNumber}>$ 4,73.29</Text>
+                        <Text style={styles.styleDigits, styles.styleDigitsNumber} >$ 80.3M</Text>
+                        <Text style={styles.styleDigits, styles.styleDigitsNumber} >$ 1.63M</Text>
+                    </View>
+                    <View style={{ flexDirection: 'row', justifyContent: 'space-between', marginBottom: 10 }}>
+                        <Text style={styles.styleDigits, styles.styleDigitsType}>Global Avg.</Text>
+                        <Text style={styles.styleDigits, styles.styleDigitsType} >Market Cap</Text>
+                        <Text style={styles.styleDigits, styles.styleDigitsType} >Volume</Text>
+                    </View>
+
+
+                    <LineChart
+
+                        data={{
+                            labels: ['Jan', 'Feb', 'March', 'April', 'May', 'June'],
+                            datasets: [
+                                {
+                                    data: [5, 45, 20, 80, 50, 43],
+                                    strokeWidth: 2.5,
+
+                                },
+                            ],
+                        }}
+                        width={Dimensions.get('screen').width - 70}
+                        height={190}
+                        chartConfig={{
+                            backgroundColor: 'none',
+                            backgroundGradientFromOpacity: 0.05,
+                            backgroundGradientToOpacity: 0.05,
+                            backgroundGradientFrom: '#D1D1D1',
+                            backgroundGradientTo: '#D1D1D1',
+                            propsForDots: {
+                                stroke: 'white',
+                                strokeWidth: 1,
+                            },
+                            linejoinType: 'round',
+                            propsForLabels: {
+                                stroke: 'white',
+                                fontSize: 10,
+                                fontWeight: 'normal'
+                            },
+                            decimalPlaces: 0,
+                            color: (opacity = 0.5) => `rgba(0,0,0,${opacity})`,
+
+                            style: {
+                                borderRadius: 10,
+                            },
+                        }}
+                        bezier={true}
+                        fromZero={true}
+                        segments={5}
+                        withVerticalLines={false}
+                        style={{
+                            marginVertical: 4,
+                            borderRadius: 5,
+                        }}
+                        onDataPointClick={(data) => {
+                            alert(data.value);
+                        }}
+                        xLabelsOffset={-4}
+                        yLabelsOffset={25}
+                    />
                 </View>
-                <View style={{ flexDirection: 'row', justifyContent: 'space-between', marginBottom: 10 }}>
-                    <Text style={styles.styleDigits, styles.styleDigitsType}>Global Avg.</Text>
-                    <Text style={styles.styleDigits, styles.styleDigitsType} >Market Cap</Text>
-                    <Text style={styles.styleDigits, styles.styleDigitsType} >Volume</Text>
+                <View style={{ borderRadius: 30, paddingHorizontal: 15, paddingVertical: 10, backgroundColor: '#363636', marginHorizontal: 14 }} >
+                    <Text style={{ color: 'white', fontSize: 20, marginVertical: 10, fontFamily: 'Lato-Light' }}>Sales Revennue</Text>
+                    {
+                        datas.map(el => <InfoCard key={el.id} iconName={el.iconName} numbers={el.numbers} type={el.type} bgColor={el.bgColor} />)
+                    }
                 </View>
 
-                <Image source={{
-                    uri: 'https://miro.medium.com/max/1838/1*l-wUmJX2fwhXhepVfKF7tQ.png'
-                }}
-                    style={{
-                        height: 150
-                    }}
-                    resizeMode='contain'
-                ></Image>
-            </View>
-            <View style={{ borderRadius: 30, paddingHorizontal: 15, paddingVertical: 10, backgroundColor: '#363636', marginHorizontal: 14 }} >
-                <Text style={{ color: 'white', fontSize: 20, marginVertical: 10 }}>Sales Revennue</Text>
-                {
-                    datas.map(el => <InfoCard key={el.id} iconName={el.iconName} numbers={el.numbers} type={el.type} bgColor={el.bgColor} />)
-                }
-            </View>
-        </InitialView>
+            </InitialView>
+
+        </ScrollView>
+
     )
 }
 
